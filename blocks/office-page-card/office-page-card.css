@@ -119,8 +119,7 @@
 
 /* Responsive */
 
-@media (max-width: 768px) {
-
+@media (width <= 768px) {
   .office-page-card {
     padding: 0 20px;
   }

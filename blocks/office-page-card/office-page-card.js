@@ -1,13 +1,8 @@
 export default async function decorate(block) {
-  const rows = [...block.querySelectorAll(':scope > div')];
+  const rows = [...block.children];
 
-  const officePage = rows[0]
-    ?.querySelector('a')
-    ?.getAttribute('href')
-    ?.trim();
-
-  const cta =
-    rows[1]?.textContent.trim() || 'Learn More';
+  const officePage = rows[0]?.querySelector('a')?.getAttribute('href')?.trim();
+  const cta = rows[1]?.textContent.trim() || 'Learn More';
 
   if (!officePage) {
     block.innerHTML = '<p>Office page not configured.</p>';
@@ -18,52 +13,40 @@ export default async function decorate(block) {
     const response = await fetch(`${officePage}.plain.html`);
 
     if (!response.ok) {
-      throw new Error(`Unable to load ${officePage}`);
+      throw new Error('Unable to fetch office page.');
     }
 
     const html = await response.text();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
 
-    const doc = new DOMParser().parseFromString(
-      html,
-      'text/html'
-    );
+    const hero = doc.querySelector('.hero');
+
+    if (!hero) {
+      block.innerHTML = '<p>Hero block not found.</p>';
+      return;
+    }
+
+    const heroRows = [...hero.children];
 
     let image = '';
     let eyebrow = '';
     let title = '';
-    const address = [];
-
-    /* -------------------------------
-       Find Hero Block
-    -------------------------------- */
-
-    const heroTable = [...doc.querySelectorAll('table')].find((table) => {
-      const heading = table.querySelector('tr:first-child th');
-      return heading && heading.textContent.trim().toLowerCase() === 'hero';
-    });
-
-    if (!heroTable) {
-      block.innerHTML =
-        '<p>Hero block not found on Office page.</p>';
-      return;
-    }
-
-    const heroRows = [...heroTable.querySelectorAll('tr')];
+    let description = '';
 
     heroRows.forEach((row) => {
-      const cells = row.querySelectorAll('td');
+      const cols = row.querySelectorAll(':scope > div');
 
-      if (cells.length < 2) return;
+      if (cols.length < 2) return;
 
-      const label = cells[0].textContent.trim().toLowerCase();
-      const value = cells[1];
+      const label = cols[0].textContent.trim().toLowerCase();
+      const value = cols[1];
 
       switch (label) {
         case 'image':
-          image =
-            value.querySelector('img')?.src ||
-            value.querySelector('a')?.href ||
-            '';
+          image = value.querySelector('img')?.src
+            || value.querySelector('picture img')?.src
+            || value.querySelector('a')?.href
+            || '';
           break;
 
         case 'eyebrow':
@@ -75,17 +58,11 @@ export default async function decorate(block) {
           break;
 
         case 'description':
-          address.push(
-            ...value.innerHTML
-              .split('<br>')
-              .map((line) =>
-                line.replace(/<[^>]+>/g, '').trim()
-              )
-              .filter(Boolean)
-          );
+          description = value.innerHTML;
           break;
 
         default:
+          break;
       }
     });
 
@@ -95,13 +72,10 @@ export default async function decorate(block) {
         ${
           image
             ? `
-        <div class="office-card-image">
-          <img
-            src="${image}"
-            alt="${title}"
-            loading="lazy">
-        </div>
-        `
+              <div class="office-card-image">
+                <img src="${image}" alt="${title}" loading="lazy">
+              </div>
+            `
             : ''
         }
 
@@ -113,34 +87,31 @@ export default async function decorate(block) {
               : ''
           }
 
-          <h3 class="office-card-title">
-            ${title}
-          </h3>
+          ${
+            title
+              ? `<h3 class="office-card-title">${title}</h3>`
+              : ''
+          }
 
-          <div class="office-card-address">
-            ${address
-              .map((line) => `<p>${line}</p>`)
-              .join('')}
-          </div>
+          ${
+            description
+              ? `<div class="office-card-address">${description}</div>`
+              : ''
+          }
 
-          <a
-            href="${officePage}"
-            class="office-card-link">
-
+          <a href="${officePage}" class="office-card-link">
             ${cta}
-
             <span></span>
-
           </a>
 
         </div>
 
       </div>
     `;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
 
-    block.innerHTML =
-      '<p>Unable to load office information.</p>';
+    block.innerHTML = '<p>Unable to load office information.</p>';
   }
 }
