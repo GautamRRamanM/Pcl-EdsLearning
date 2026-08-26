@@ -2,7 +2,7 @@ export default async function decorate(block) {
   const rows = [...block.children];
 
   const officePage = rows[0]?.querySelector('a')?.getAttribute('href')?.trim();
-  const cta = rows[1]?.textContent.trim() || 'Learn More';
+  const cta = rows[1]?.children[1]?.textContent.trim() || 'Learn More';
 
   if (!officePage) {
     block.innerHTML = '<p>Office page not configured.</p>';

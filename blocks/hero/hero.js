@@ -1,15 +1,10 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  const imageRow = rows[0];
-  const eyebrowRow = rows[1];
-  const titleRow = rows[2];
-  const descriptionRow = rows[3];
-
-  const image = imageRow?.querySelector('picture');
-  const eyebrow = eyebrowRow?.textContent.trim();
-  const title = titleRow?.textContent.trim();
-  const description = descriptionRow?.innerHTML;
+  const image = rows[0]?.children[1]?.querySelector('picture');
+  const eyebrow = rows[1]?.children[1]?.textContent.trim();
+  const title = rows[2]?.children[1]?.textContent.trim();
+  const description = rows[3]?.children[1]?.innerHTML;
 
   block.innerHTML = '';
 
@@ -20,7 +15,7 @@ export default function decorate(block) {
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'hero-image';
     imageWrapper.append(image);
-    hero.append(imageWrapper);
+    hero.appendChild(imageWrapper);
   }
 
   const content = document.createElement('div');
@@ -30,23 +25,23 @@ export default function decorate(block) {
     const eyebrowEl = document.createElement('div');
     eyebrowEl.className = 'hero-eyebrow';
     eyebrowEl.textContent = eyebrow;
-    content.append(eyebrowEl);
+    content.appendChild(eyebrowEl);
   }
 
   if (title) {
-    const heading = document.createElement('h1');
-    heading.className = 'hero-title';
-    heading.textContent = title;
-    content.append(heading);
+    const titleEl = document.createElement('h1');
+    titleEl.className = 'hero-title';
+    titleEl.textContent = title;
+    content.appendChild(titleEl);
   }
 
   if (description) {
     const desc = document.createElement('div');
     desc.className = 'hero-description';
     desc.innerHTML = description;
-    content.append(desc);
+    content.appendChild(desc);
   }
 
-  hero.append(content);
-  block.append(hero);
+  hero.appendChild(content);
+  block.appendChild(hero);
 }

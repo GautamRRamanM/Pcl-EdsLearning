@@ -1,10 +1,5 @@
-.hero {
-  width: 100%;
-}
-
 .hero-banner {
   position: relative;
-  overflow: hidden;
 }
 
 .hero-image picture,
@@ -16,52 +11,48 @@
 
 .hero-content {
   position: absolute;
-  left: 8%;
   top: 50%;
+  left: 8%;
   transform: translateY(-50%);
   color: #fff;
   max-width: 520px;
 }
 
 .hero-eyebrow {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-size: 16px;
+  font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
 }
 
 .hero-title {
-  margin: 0 0 20px;
-  font-size: 56px;
+  font-size: 64px;
   line-height: 1.1;
+  margin: 0 0 32px;
   font-weight: 700;
 }
 
 .hero-description {
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1.6;
 }
 
 .hero-description p {
-  margin: 0 0 12px;
+  margin: 0;
+}
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,.45) 0%,
+    rgba(0,0,0,.15) 40%,
+    transparent 70%
+  );
 }
 
-@media (width <= 768px) {
-  .hero-content {
-    position: static;
-    transform: none;
-    background: #fff;
-    color: #000;
-    padding: 24px;
-    max-width: 100%;
-  }
-
-  .hero-title {
-    font-size: 34px;
-  }
-
-  .hero-description {
-    font-size: 18px;
-  }
+.hero-content {
+  z-index: 1;
 }
