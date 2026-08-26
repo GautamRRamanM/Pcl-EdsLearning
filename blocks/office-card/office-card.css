@@ -64,7 +64,7 @@
   width: 48px;
   height: 2px;
   margin-left: 16px;
-  background: currentColor;
+  background: currentcolor;
   transition: width .25s ease;
 }
 

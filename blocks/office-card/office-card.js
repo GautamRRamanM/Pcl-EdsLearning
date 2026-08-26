@@ -51,7 +51,7 @@ function toPlainHtmlPath(href) {
   try {
     const base = EDS_ORIGIN || window.location.origin;
     const url = new URL(href, base);
-    url.pathname = url.pathname.replace(/\.html$/, '') + '.plain.html';
+    url.pathname = `${url.pathname.replace(/\.html$/, '')}.plain.html`;
     // Always return an absolute URL: relative to `base`, not the current
     // page's origin, so this works correctly from inside the UE canvas.
     return new URL(url.pathname + url.search, base).toString();
@@ -87,9 +87,12 @@ async function fetchOfficeData(path) {
       // otherwise the first paragraph after the heading.
       let addressLines = [];
       const paragraphs = [...card.querySelectorAll('p')];
+      // compareDocumentPosition() returns a bitmask; bitwise AND is its
+      // documented, correct usage here, not a mistake.
+      // eslint-disable-next-line no-bitwise
+      const isAfter = (a, b) => a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING;
       const addressEl = heading
-        ? paragraphs.find((p) => heading.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING
-          && (!phoneLink || p.compareDocumentPosition(phoneLink) & Node.DOCUMENT_POSITION_FOLLOWING))
+        ? paragraphs.find((p) => isAfter(heading, p) && (!phoneLink || isAfter(p, phoneLink)))
         : paragraphs[0];
       if (addressEl) {
         const clone = addressEl.cloneNode(true);
@@ -105,7 +108,9 @@ async function fetchOfficeData(path) {
         console.warn('[office-page-card] fetched page but found no heading — check the .contact-card selector', path);
       }
 
-      return { picture, officeName, addressLines, phone };
+      return {
+        picture, officeName, addressLines, phone,
+      };
     } catch (err) {
       // eslint-disable-next-line no-console
       console.warn('[office-page-card] fetch/parse error for', path, err);
@@ -125,9 +130,9 @@ export default async function decorate(block) {
 
   if (isLabelValueShape) {
     rows.forEach((row) => {
-      const cols = row.children;
-      const key = getText(cols[0]).toLowerCase();
-      data[key] = cols[1];
+      const [labelCell, valueCell] = [...row.children];
+      const key = getText(labelCell).toLowerCase();
+      data[key] = valueCell;
     });
   } else {
     rows.forEach((row, i) => {
@@ -142,7 +147,7 @@ export default async function decorate(block) {
   // Authored overrides take priority; otherwise pull from the referenced page's Contact Card.
   let officeName = getText(data['office name']);
   let legalTitle = getText(data['legal title']);
-  let alt = getText(data.alt);
+  const alt = getText(data.alt);
   let addressLines = ['address 1', 'address 2', 'address 3']
     .map((key) => getText(data[key]))
     .filter(Boolean);
