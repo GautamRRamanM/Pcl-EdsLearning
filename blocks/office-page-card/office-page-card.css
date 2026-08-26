@@ -1,115 +1,151 @@
 .office-page-card {
-  --office-page-card-bg: #f2f2f2;
-  --office-page-card-accent: #ffd100;
-  --office-page-card-cta-color: #00543d;
+  display: flex;
+  justify-content: center;
+  margin: 64px auto;
 }
 
-.office-page-card-link {
-  display: block;
+.office-card {
   position: relative;
-  background: var(--office-page-card-bg);
-  text-decoration: none;
-  color: inherit;
-  overflow: hidden;
-  transition: box-shadow .25s ease;
+  width: 100%;
+  max-width: 460px;
+  background: #fff;
 }
 
-.office-page-card-image img {
-  width: 100%;
+/* Yellow decorative border */
+
+.office-card::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 18px;
+  bottom: -12px;
+  width: 12px;
+  background: #f9c62b;
+}
+
+.office-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: -12px;
+  bottom: -12px;
+  height: 12px;
+  background: #f9c62b;
+}
+
+/* Image */
+
+.office-card-image {
+  overflow: hidden;
+}
+
+.office-card-image img {
   display: block;
-  aspect-ratio: 4 / 3;
+  width: 100%;
+  height: 320px;
   object-fit: cover;
 }
 
-.office-page-card-body {
-  padding: 24px;
+/* Content */
+
+.office-card-content {
+  background: #fff;
+  padding: 34px;
 }
 
-.office-page-card-eyebrow {
-  margin: 0 0 12px;
-  font-size: 12px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
+/* Eyebrow */
+
+.office-card-eyebrow {
+  margin-bottom: 16px;
+  color: #003b49;
+  font-size: 14px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-.office-page-card-title {
-  margin: 0 0 20px;
-  font-size: 28px;
-  line-height: 1.15;
+/* Title */
+
+.office-card-title {
+  margin: 0 0 22px;
+  color: #000;
+  font-size: 44px;
   font-weight: 700;
+  line-height: 1.1;
 }
 
-.office-page-card-address {
-  margin: 0 0 32px;
+/* Address */
+
+.office-card-address {
+  margin-bottom: 48px;
 }
 
-.office-page-card-address p {
+.office-card-address p {
   margin: 0;
+  color: #222;
+  font-size: 24px;
   line-height: 1.6;
 }
 
-.office-page-card-cta {
+/* CTA */
+
+.office-card-link {
   display: inline-flex;
   align-items: center;
+  gap: 22px;
+  color: #00594f;
+  text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: .12em;
+  font-size: 18px;
   font-weight: 700;
-  font-size: 13px;
-  color: var(--office-page-card-cta-color);
+  letter-spacing: 2px;
 }
 
-.office-page-card-cta::after {
-  content: '';
+.office-card-link span {
+  display: inline-block;
   width: 48px;
   height: 2px;
-  margin-left: 16px;
-  background: currentcolor;
+  background: #00594f;
   transition: width .25s ease;
 }
 
-/* Hover state: yellow offset shadow (full height) + cut corner triangles */
-.office-page-card-link:hover,
-.office-page-card-link:focus-visible {
-  cursor: pointer;
-  box-shadow: -10px 0 0 0 var(--office-page-card-accent);
+.office-card-link:hover {
+  color: #00594f;
 }
 
-.office-page-card-link:hover::before,
-.office-page-card-link:hover::after,
-.office-page-card-link:focus-visible::before,
-.office-page-card-link:focus-visible::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  display: block;
+.office-card-link:hover span {
+  width: 72px;
 }
 
-.office-page-card-link:hover::before,
-.office-page-card-link:focus-visible::before {
-  top: 0;
-  left: -10px;
-  border-width: 0 0 10px 10px;
-  border-color: transparent transparent var(--office-page-card-accent) transparent;
-}
+/* Responsive */
 
-.office-page-card-link:hover::after,
-.office-page-card-link:focus-visible::after {
-  right: 0;
-  bottom: -10px;
-  border-width: 10px 10px 0 0;
-  border-color: var(--office-page-card-accent) transparent transparent transparent;
-}
+@media (max-width: 768px) {
 
-.office-page-card-link:hover .office-page-card-cta::after,
-.office-page-card-link:focus-visible .office-page-card-cta::after {
-  width: 64px;
-}
+  .office-page-card {
+    padding: 0 20px;
+  }
 
-@media (width >= 768px) {
-  .office-page-card-title {
+  .office-card {
+    max-width: 100%;
+  }
+
+  .office-card-image img {
+    height: 240px;
+  }
+
+  .office-card-content {
+    padding: 24px;
+  }
+
+  .office-card-title {
     font-size: 32px;
+  }
+
+  .office-card-address p {
+    font-size: 18px;
+  }
+
+  .office-card-link {
+    font-size: 16px;
   }
 }
