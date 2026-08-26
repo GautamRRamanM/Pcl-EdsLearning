@@ -1,0 +1,115 @@
+.office-page-card {
+  --office-page-card-bg: #f2f2f2;
+  --office-page-card-accent: #ffd100;
+  --office-page-card-cta-color: #00543d;
+}
+
+.office-page-card-link {
+  display: block;
+  position: relative;
+  background: var(--office-page-card-bg);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: box-shadow .25s ease;
+}
+
+.office-page-card-image img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.office-page-card-body {
+  padding: 24px;
+}
+
+.office-page-card-eyebrow {
+  margin: 0 0 12px;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.office-page-card-title {
+  margin: 0 0 20px;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.office-page-card-address {
+  margin: 0 0 32px;
+}
+
+.office-page-card-address p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.office-page-card-cta {
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--office-page-card-cta-color);
+}
+
+.office-page-card-cta::after {
+  content: '';
+  width: 48px;
+  height: 2px;
+  margin-left: 16px;
+  background: currentColor;
+  transition: width .25s ease;
+}
+
+/* Hover state: yellow offset shadow (full height) + cut corner triangles */
+.office-page-card-link:hover,
+.office-page-card-link:focus-visible {
+  cursor: pointer;
+  box-shadow: -10px 0 0 0 var(--office-page-card-accent);
+}
+
+.office-page-card-link:hover::before,
+.office-page-card-link:hover::after,
+.office-page-card-link:focus-visible::before,
+.office-page-card-link:focus-visible::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  display: block;
+}
+
+.office-page-card-link:hover::before,
+.office-page-card-link:focus-visible::before {
+  top: 0;
+  left: -10px;
+  border-width: 0 0 10px 10px;
+  border-color: transparent transparent var(--office-page-card-accent) transparent;
+}
+
+.office-page-card-link:hover::after,
+.office-page-card-link:focus-visible::after {
+  right: 0;
+  bottom: -10px;
+  border-width: 10px 10px 0 0;
+  border-color: var(--office-page-card-accent) transparent transparent transparent;
+}
+
+.office-page-card-link:hover .office-page-card-cta::after,
+.office-page-card-link:focus-visible .office-page-card-cta::after {
+  width: 64px;
+}
+
+@media (width >= 768px) {
+  .office-page-card-title {
+    font-size: 32px;
+  }
+}
