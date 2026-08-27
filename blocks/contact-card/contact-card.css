@@ -138,13 +138,7 @@
   white-space: nowrap;
 }
 
-.contact-card__phone:hover,
-.contact-card__phone:focus-visible {
-  text-decoration: underline;
-}
-
-
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .contact-card {
     max-width: 100%;
     min-height: auto;
@@ -173,7 +167,7 @@
 }
 
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .contact-card {
     padding: 40px 25px;
   }
@@ -260,34 +254,6 @@
 }
 
 
-.contact-card__linkedin {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
-  border-radius: 2px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-}
-
-.contact-card__linkedin span {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -1px;
-}
-
-.contact-card__linkedin:hover,
-.contact-card__linkedin:focus-visible {
-  background: #333;
-  color: #fff;
-}
-
-
 .contact-card__one-column-description {
   margin-top: 20px;
   max-width: 420px;
@@ -340,7 +306,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .contact-card__one-column {
     grid-template-columns: minmax(0, 1fr) 200px;
   }
@@ -370,7 +336,7 @@
 
 
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .contact-card__one-column {
     grid-template-columns: 1fr;
   }
@@ -406,6 +372,7 @@
     margin-top: 15px;
   }
 }
+
 .contact-card__phone-row,
 .contact-card__email-row {
   display: flex;
@@ -437,4 +404,9 @@
   padding: 0;
   font-size: 16px;
   line-height: 24px;
+}
+
+.contact-card__phone:hover,
+.contact-card__phone:focus-visible {
+  text-decoration: underline;
 }
