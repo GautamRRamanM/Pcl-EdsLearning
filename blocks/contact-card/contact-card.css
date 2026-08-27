@@ -19,10 +19,6 @@
   width: 100%;
 }
 
-/*
- * Heading
- */
-
 .contact-card__title {
   margin: 0 0 46px;
   font-size: 17px;
@@ -33,10 +29,6 @@
   color: #111;
 }
 
-/*
- * Two-column layout
- */
-
 .contact-card__columns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -44,9 +36,6 @@
   align-items: start;
 }
 
-/*
- * Employee section
- */
 
 .contact-card__employee {
   min-width: 0;
@@ -67,9 +56,7 @@
   color: #111;
 }
 
-/*
- * LinkedIn icon
- */
+
 
 .contact-card__linkedin {
   display: inline-flex;
@@ -98,9 +85,6 @@
   color: #fff;
 }
 
-/*
- * Job title
- */
 
 .contact-card__job-title {
   max-width: 270px;
@@ -109,10 +93,6 @@
   font-weight: 400;
   color: #111;
 }
-
-/*
- * Right contact section
- */
 
 .contact-card__contact {
   min-width: 0;
@@ -128,9 +108,6 @@
   color: #111;
 }
 
-/*
- * Phone
- */
 
 .contact-card__phone-row {
   display: flex;
@@ -168,9 +145,6 @@
   text-decoration: underline;
 }
 
-/*
- * Tablet
- */
 
 @media (max-width: 768px) {
   .contact-card {
@@ -200,9 +174,6 @@
   }
 }
 
-/*
- * Mobile
- */
 
 @media (max-width: 600px) {
   .contact-card {
@@ -239,9 +210,6 @@
   }
 }
 
-/* =====================================================
-   ONE COLUMN / LEADERSHIP CARD
-   ===================================================== */
 
 .contact-card__one-column {
   display: grid;
@@ -250,19 +218,12 @@
   background: #f7f7f7;
 }
 
-/*
- * LEFT SIDE
- */
 
 .contact-card__one-column-content {
   display: flex;
   flex-direction: column;
   padding: 64px 48px;
 }
-
-/*
- * "MEET THE LEADERSHIP TEAM"
- */
 
 .contact-card__one-column-title {
   margin-bottom: 38px;
@@ -273,10 +234,6 @@
   text-transform: uppercase;
   color: #17324d;
 }
-
-/*
- * "VICE PRESIDENT AND DISTRICT MANAGER"
- */
 
 .contact-card__one-column-contact-title {
   max-width: 390px;
@@ -289,9 +246,6 @@
   color: #17324d;
 }
 
-/*
- * NAME + LINKEDIN
- */
 
 .contact-card__one-column-name-row {
   display: flex;
@@ -307,9 +261,6 @@
   color: #111;
 }
 
-/*
- * LinkedIn
- */
 
 .contact-card__linkedin {
   display: inline-flex;
@@ -338,9 +289,6 @@
   color: #fff;
 }
 
-/*
- * Optional description
- */
 
 .contact-card__one-column-description {
   margin-top: 20px;
@@ -348,10 +296,6 @@
   font-size: 17px;
   line-height: 1.5;
 }
-
-/*
- * RIGHT IMAGE
- */
 
 .contact-card__one-column-image {
   width: 100%;
@@ -369,9 +313,6 @@
   object-position: center;
 }
 
-/*
- * CTA
- */
 
 .contact-card__one-column-cta-wrapper {
   width: 100%;
@@ -400,9 +341,6 @@
   color: #fff;
 }
 
-/*
- * TABLET
- */
 
 @media (max-width: 768px) {
   .contact-card__one-column {
@@ -432,9 +370,7 @@
   }
 }
 
-/*
- * MOBILE
- */
+
 
 @media (max-width: 600px) {
   .contact-card__one-column {

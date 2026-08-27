@@ -72,10 +72,6 @@ function createLinkedInIcon(link) {
   return anchor;
 }
 
-/* -------------------------------------------------------
- * ONE COLUMN / LEADERSHIP CARD
- * ----------------------------------------------------- */
-
 function decorateOneColumn(block) {
   const title = getValue(block, 'Title');
   const description = getValue(block, 'Description');
@@ -87,39 +83,24 @@ function decorateOneColumn(block) {
   const ctaText = getValue(block, 'CTA Text');
   const ctaLink = getLink(block, 'CTA Link');
 
-  /*
-     * Save image information before clearing block.
-     */
   let imageElement = null;
 
   if (image) {
     imageElement = image.cloneNode(true);
   }
 
-  /*
-     * Clear authored DOM.
-     */
   block.innerHTML = '';
 
-  /*
-     * Main card
-     */
   const card = createElement(
     'div',
     'contact-card__one-column',
   );
 
-  /*
-     * LEFT CONTENT
-     */
   const content = createElement(
     'div',
     'contact-card__one-column-content',
   );
 
-  /*
-     * Title
-     */
   if (title) {
     const titleElement = createElement(
       'div',
@@ -130,9 +111,6 @@ function decorateOneColumn(block) {
     content.appendChild(titleElement);
   }
 
-  /*
-     * Contact title
-     */
   if (contactTitle) {
     const contactTitleElement = createElement(
       'div',
@@ -143,9 +121,6 @@ function decorateOneColumn(block) {
     content.appendChild(contactTitleElement);
   }
 
-  /*
-     * Name + LinkedIn
-     */
   const nameRow = createElement(
     'div',
     'contact-card__one-column-name-row',
@@ -169,9 +144,6 @@ function decorateOneColumn(block) {
 
   content.appendChild(nameRow);
 
-  /*
-     * Description
-     */
   if (description) {
     const descriptionElement = createElement(
       'div',
@@ -182,9 +154,6 @@ function decorateOneColumn(block) {
     content.appendChild(descriptionElement);
   }
 
-  /*
-     * RIGHT IMAGE
-     */
   const imageWrapper = createElement(
     'div',
     'contact-card__one-column-image',
@@ -196,20 +165,11 @@ function decorateOneColumn(block) {
     imageWrapper.appendChild(imageElement);
   }
 
-  /*
-     * Add left + right
-     */
   card.appendChild(content);
   card.appendChild(imageWrapper);
 
-  /*
-     * Add card to block
-     */
   block.appendChild(card);
 
-  /*
-     * CTA
-     */
   if (ctaText) {
     const ctaWrapper = createElement(
       'div',
@@ -229,10 +189,6 @@ function decorateOneColumn(block) {
     block.appendChild(ctaWrapper);
   }
 }
-
-/* -------------------------------------------------------
- * TWO COLUMN
- * ----------------------------------------------------- */
 
 function decorateTwoColumn(block) {
   const title = getValue(block, 'Title');
@@ -262,9 +218,6 @@ function decorateTwoColumn(block) {
     'contact-card__columns',
   );
 
-  /*
-     * EMPLOYEE
-     */
   const employee = createElement(
     'div',
     'contact-card__employee',
@@ -299,9 +252,6 @@ function decorateTwoColumn(block) {
 
   employee.appendChild(role);
 
-  /*
-     * CONTACT INFORMATION
-     */
   const contact = createElement(
     'div',
     'contact-card__contact',
@@ -315,9 +265,6 @@ function decorateTwoColumn(block) {
 
   contact.appendChild(contactLabel);
 
-  /*
-     * PHONE
-     */
   if (phone) {
     const phoneRow = createElement(
       'div',
@@ -360,9 +307,6 @@ function decorateTwoColumn(block) {
     contact.appendChild(phoneRow);
   }
 
-  /*
-     * EMAIL
-     */
   if (email) {
     const emailRow = createElement(
       'div',
@@ -423,11 +367,6 @@ export default function decorate(block) {
   const columnType = getValue(
     block,
     'Column Type',
-  );
-
-  console.log(
-    'Contact Card Column Type:',
-    columnType,
   );
 
   if (columnType === 'one-column') {
