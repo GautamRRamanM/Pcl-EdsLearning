@@ -70,34 +70,34 @@ export default async function decorate(block) {
       <div class="office-card">
 
         ${
-          image
-            ? `
+  image
+    ? `
               <div class="office-card-image">
                 <img src="${image}" alt="${title}" loading="lazy">
               </div>
             `
-            : ''
-        }
+    : ''
+}
 
         <div class="office-card-content">
 
           ${
-            eyebrow
-              ? `<div class="office-card-eyebrow">${eyebrow}</div>`
-              : ''
-          }
+  eyebrow
+    ? `<div class="office-card-eyebrow">${eyebrow}</div>`
+    : ''
+}
 
           ${
-            title
-              ? `<h3 class="office-card-title">${title}</h3>`
-              : ''
-          }
+  title
+    ? `<h3 class="office-card-title">${title}</h3>`
+    : ''
+}
 
           ${
-            description
-              ? `<div class="office-card-address">${description}</div>`
-              : ''
-          }
+  description
+    ? `<div class="office-card-address">${description}</div>`
+    : ''
+}
 
           <a href="${officePage}" class="office-card-link">
             ${cta}
