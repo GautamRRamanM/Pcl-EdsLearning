@@ -67,47 +67,50 @@ export default async function decorate(block) {
     });
 
     block.innerHTML = `
-      <div class="office-card">
+  <a href="${officePage}" class="office-card-wrapper-link">
+
+    <div class="office-card">
+
+      ${
+  image
+    ? `
+            <div class="office-card-image">
+              <img src="${image}" alt="${title}" loading="lazy">
+            </div>
+          `
+    : ''
+}
+
+      <div class="office-card-content">
 
         ${
-          image
-            ? `
-              <div class="office-card-image">
-                <img src="${image}" alt="${title}" loading="lazy">
-              </div>
-            `
-            : ''
-        }
+  eyebrow
+    ? `<div class="office-card-eyebrow">${eyebrow}</div>`
+    : ''
+}
 
-        <div class="office-card-content">
+        ${
+  title
+    ? `<h3 class="office-card-title">${title}</h3>`
+    : ''
+}
 
-          ${
-            eyebrow
-              ? `<div class="office-card-eyebrow">${eyebrow}</div>`
-              : ''
-          }
+        ${
+  description
+    ? `<div class="office-card-address">${description.replace(/<a[^>]*>|<\/a>/g, '')}</div>`
+    : ''
+}
 
-          ${
-            title
-              ? `<h3 class="office-card-title">${title}</h3>`
-              : ''
-          }
-
-          ${
-            description
-              ? `<div class="office-card-address">${description}</div>`
-              : ''
-          }
-
-          <a href="${officePage}" class="office-card-link">
-            ${cta}
-            <span></span>
-          </a>
-
+        <div class="office-card-cta">
+          <span>${cta}</span>
         </div>
 
       </div>
-    `;
+
+    </div>
+
+  </a>
+`;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
