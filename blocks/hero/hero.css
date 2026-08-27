@@ -1,58 +1,240 @@
-.hero-banner {
-  position: relative;
+/* Make the section itself full width */
+.section.hero-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
 }
 
-.hero-image picture,
-.hero-image img {
-  display: block;
+/* Remove EDS wrapper constraints */
+.section.hero-container > .hero-wrapper {
   width: 100%;
-  height: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
 }
+
+/* Keep hero content centered */
+.hero.block {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.hero-banner {
+  display: flex;
+  flex-direction: column-reverse;
+  background: #f5f5f5;
+  min-height: 500px;
+}
+
+@media (width >= 768px) {
+  .hero-banner {
+    flex-direction: row;
+  }
+}
+
+/* ===================================
+   LEFT CONTENT
+=================================== */
 
 .hero-content {
-  position: absolute;
-  top: 50%;
-  left: 8%;
-  transform: translateY(-50%);
-  color: #fff;
-  max-width: 520px;
+  flex: 0 0 46%;
+  max-width: 46%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 56px;
+  position: relative;
+  background: #f5f5f5;
 }
 
 .hero-eyebrow {
-  font-size: 16px;
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
+  letter-spacing: .18em;
+  color: #111;
+  margin-bottom: 28px;
+}
+
+.hero-eyebrow::before {
+  content: "";
+  position: absolute;
+  left: -230px;
+  top: 50%;
+  width: 200px;
+  height: 2px;
+  background: #f5c400;
+  transform: translateY(-50%);
 }
 
 .hero-title {
-  font-size: 64px;
-  line-height: 1.1;
-  margin: 0 0 32px;
+  font-size: 56px;
+  line-height: 1.05;
   font-weight: 700;
+  color: #111;
+  margin: 0 0 28px;
 }
 
 .hero-description {
-  font-size: 22px;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.45;
+  color: #333 !important;
+  font-weight: 600;
 }
 
 .hero-description p {
   margin: 0;
 }
-.hero-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(0,0,0,.45) 0%,
-    rgba(0,0,0,.15) 40%,
-    transparent 70%
-  );
+
+.hero-description br {
+  line-height: 1.7;
 }
 
-.hero-content {
-  z-index: 1;
+/* ===================================
+   ADDRESS LINK (UPDATED)
+=================================== */
+
+.hero-address-link,
+.hero-address-link:link,
+.hero-address-link:visited {
+  display: inline-block;
+  color: #333 !important;
+  text-decoration: none;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+/* Force every child inside the authored link to remain black */
+.hero-address-link *,
+.hero-address-link p,
+.hero-address-link span,
+.hero-address-link strong,
+.hero-address-link em {
+  color: inherit !important;
+  text-decoration: none;
+}
+
+/* Hover */
+.hero-address-link:hover {
+  color: #333 !important;
+  text-decoration: underline;
+}
+
+.hero-address-link:hover * {
+  color: #333 !important;
+}
+
+/* Focus */
+.hero-address-link:focus-visible {
+  outline: 2px solid #f5c400;
+  outline-offset: 3px;
+}
+
+/* Map icon */
+.hero-map-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  vertical-align: middle;
+  color: currentcolor;
+  flex-shrink: 0;
+}
+
+/* ===================================
+   RIGHT IMAGE
+=================================== */
+
+.hero-image {
+  flex: 0 0 54%;
+  max-width: 54%;
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.hero-image picture,
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-image img {
+  object-fit: cover;
+}
+
+/* Yellow Chevron */
+
+.hero-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 180px;
+  background: rgb(245 196 0 / 55%);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (width <= 768px) {
+  .hero-banner {
+    flex-direction: column-reverse;
+    min-height: auto;
+  }
+
+  .hero-content,
+  .hero-image {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .hero-content {
+    padding: 36px 28px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .hero-description {
+    font-size: 18px;
+  }
+
+  .hero-eyebrow::before {
+    display: none;
+  }
+
+  .hero-image {
+    min-height: 320px;
+  }
+}
+
+/* Hero description address */
+.hero-description a,
+.hero-description a:any-link,
+.hero-description a:visited,
+.hero-description a:active {
+  color: #333 !important;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+.hero-description a:hover {
+  color: #333 !important;
+  text-decoration: underline;
 }
